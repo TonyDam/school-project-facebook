@@ -3615,9 +3615,9 @@ input[type=button].btn-block {
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-  color: #16181b;
+  color: #fff;
   text-decoration: none;
-  background-color: #f8f9fa;
+  background-color: #385898;
 }
 
 .dropdown-item.active,
@@ -4547,6 +4547,9 @@ input[type=button].btn-block {
   font-size: 1.125rem;
   line-height: inherit;
   white-space: nowrap;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, ".SFNSText-Regular",
+      sans-serif;
+  font-weight: 600;
 }
 
 .navbar-brand:hover,

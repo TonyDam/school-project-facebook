@@ -10,18 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
-class RegisterController extends Controller
-{
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+class RegisterController extends Controller {
 
     use RegistersUsers;
 
@@ -53,6 +42,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'firstname' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
+            'pseudo' => ['string', 'alpha_num', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -67,20 +57,28 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $request = app('request');
-
+        
         $path = null;
 
         if($request->hasFile('avatar')){
             $avatar = $request->file('avatar');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
             $path = '/uploads/avatars/' . $filename;
-            Image::make($avatar)->resize(100, 100)->save(public_path($path));
+            Image::make($avatar)->resize(200, 200)->save(public_path($path));
         }
-
+        if($request->hasFile('cover')){
+            $cover = $request->file('cover');
+            $filename = time() . '.' . $cover->getClientOriginalExtension();
+            $path = '/uploads/avatars/' . $filename;
+            Image::make($cover)->resize(930, 315)->save(public_path($path));
+        }
+        
         return User::create([
-            'firstname' => $data['firstname'],
             'avatar' => $path,
+            'cover' => $path,
+            'firstname' => $data['firstname'],
             'name' => $data['name'],
+            'pseudo' => null,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
