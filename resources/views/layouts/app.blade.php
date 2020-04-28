@@ -16,6 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="/img/logo-laravel-facebook.svg" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -50,7 +51,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background:#385898; padding:0.25rem;">
             <div class="container">
-                <a class="navbar-brand p-0 m-0" href="{{ url('home') }}" style="color: white!important">
+                <a class="navbar-brand p-0 m-0" href="{{ url('home') }}" style="color: white!important;">
                     Facebouk
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
